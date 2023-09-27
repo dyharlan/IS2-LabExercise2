@@ -10,9 +10,15 @@ import numpy as np
 ### Load the Data set
 df = pd.read_csv("diabetes.csv")
 
+### Data cleaning
+# Drop zeroed row in the ff features
+df = df.loc[df['BMI'] > 0]
+df = df.loc[df['BloodPressure'] > 0]
+df = df.loc[df['Glucose'] > 0]
+
 from sklearn.model_selection import train_test_split
 ### Split the data set
-X = df[['BloodPressure', 'Age', 'Insulin', 'Glucose', 'BMI']]
+X = df[['BloodPressure', 'Insulin', 'Glucose', 'BMI']]
 y = df['Outcome']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
